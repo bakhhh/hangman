@@ -1,0 +1,1 @@
+#This game is a mini project i created to help me learn C a bit better so dont expect it to be good lol
