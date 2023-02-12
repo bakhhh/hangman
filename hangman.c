@@ -15,6 +15,10 @@ void makeLower(char option[], char lowerGuess[]){
     lowerGuess[i] = '\0';
 }
 
+void clue(word *words,int randomIndex){
+    printf("\n*CLUE* %s\n",words[randomIndex].characteristic);
+
+}
 
 int main() {
     int correct_guesses = 0;
@@ -41,7 +45,7 @@ int main() {
     }
 
     printf("\nWelcome to hangman\n");
-    printf("\n*CLUE* %s\n",words[randomIndex].characteristic);
+
     
 
     while (incorrect_guesses < 7 && correct_guesses < strlen(words[randomIndex].word) && (strcmp(guess, words[randomIndex].word) != 0)){
@@ -86,6 +90,10 @@ int main() {
                 printf("\nThe letter '%s' was not found in the word.\n", lowerLetter);
                 incorrect_guesses ++;
             }
+        if (incorrect_guesses == 3){
+            clue(words,randomIndex);
+    }
+
         }
     }
 
