@@ -42,7 +42,9 @@ int main() {
     char lowerOption[100];
     char lowerGuess[100];
     char lowerLetter[100];
+    char ready[10];
     int i;
+    int exitloop = true;
     int randomIndex;
     word *words;
     words = animalWords();
@@ -56,58 +58,69 @@ int main() {
         display[i] = '_';
     }
     display[i] = '\0';
+    
+    while(exitloop == true){
+        printf("\nWelcome to hangman\n");
+        printf("GOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES ");
+        printf("\nARE YOU READY [YES][NO]: ");
+        scanf("%s",ready);
 
-    printf("\nWelcome to hangman\n");
-
+        if (strcmp(ready, "yes") == 0){
+            exitloop= false;
     
 
-    while (incorrect_guesses < 7 && correct_guesses < strlen(words[randomIndex].word) && (strcmp(guess, words[randomIndex].word) != 0)){
-        printf("\nCorrect Guesses %d/%lu                             Lives %d/7\n",correct_guesses,strlen(words[randomIndex].word),incorrect_guesses);
-        printf("\nWord: %s\n", display);
+            while (incorrect_guesses < 7 && correct_guesses < strlen(words[randomIndex].word) && (strcmp(guess, words[randomIndex].word) != 0)){
+                printf("\nCorrect Guesses %d/%lu                             Lives %d/7\n",correct_guesses,strlen(words[randomIndex].word),incorrect_guesses);
+                printf("\nWord: %s\n", display);
 
-        printf("\nWould you like to guess the word [YES][NO]: ");
-        scanf("%s", option);
-        makeLower(option,lowerOption);
+                printf("\nWould you like to guess the word [YES][NO]: ");
+                scanf("%s", option);
+                makeLower(option,lowerOption);
 
-        if (strcmp(lowerOption, "yes") == 0) {
-            printf("\nEnter your guess: ");
-            scanf(" %s", guess);
-            makeLower(guess,lowerGuess);
-            
-            if (strcmp(lowerGuess, words[randomIndex].word) == 0) {
-                printf("\nCongratulations! You guessed the word correctly.\n");
-                break;
+                if (strcmp(lowerOption, "yes") == 0) {
+                    printf("\nEnter your guess: ");
+                    scanf(" %s", guess);
+                    makeLower(guess,lowerGuess);
+                    
+                    if (strcmp(lowerGuess, words[randomIndex].word) == 0) {
+                        printf("\nCongratulations! You guessed the word correctly.\n");
+                        break;
+                    }
+                    else if (strcmp(lowerGuess, words[randomIndex].word) != 0){
+                        printf("\nYour guess is incorrect.\n");
+                        incorrect_guesses+=2;
+                    }
+                }
+                else if (strcmp(lowerOption, "no") == 0) {
+                    printf("\nEnter your letter guess: ");
+                    scanf(" %c", &letter);
+                    makeLower(&letter,lowerLetter);
+
+                    found = false;
+                    for (i = 0; i < strlen(words[randomIndex].word); i++) {
+                        if ((words[randomIndex].word)[i] == *lowerLetter) {
+                            printf("\nThe letter '%s' was found in the word.\n", lowerLetter);
+                            display[i] = *lowerLetter;
+                            found = true;
+                            correct_guesses++;
+                            break;
+                        }
+                    }
+
+                    if (found == false) {
+                        printf("\nThe letter '%s' was not found in the word.\n", lowerLetter);
+                        incorrect_guesses ++;
+                    }
+                if (incorrect_guesses == 3){
+                    clue(words,randomIndex);
             }
-            else if (strcmp(lowerGuess, words[randomIndex].word) != 0){
-                printf("\nYour guess is incorrect.\n");
-                incorrect_guesses+=2;
-            }
-        }
-        else if (strcmp(lowerOption, "no") == 0) {
-            printf("\nEnter your letter guess: ");
-            scanf(" %c", &letter);
-            makeLower(&letter,lowerLetter);
 
-            found = false;
-            for (i = 0; i < strlen(words[randomIndex].word); i++) {
-                if ((words[randomIndex].word)[i] == *lowerLetter) {
-                    printf("\nThe letter '%s' was found in the word.\n", lowerLetter);
-                    display[i] = *lowerLetter;
-                    found = true;
-                    correct_guesses++;
-                    break;
                 }
             }
-
-            if (found == false) {
-                printf("\nThe letter '%s' was not found in the word.\n", lowerLetter);
-                incorrect_guesses ++;
-            }
-        if (incorrect_guesses == 3){
-            clue(words,randomIndex);
-    }
-
         }
+        else if (strcmp(ready, "no") == 0) {
+            continue;
+  }
     }
 
     if (incorrect_guesses >= 7) {
