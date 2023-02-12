@@ -39,7 +39,7 @@ word* animalWords() {
 
     strcpy(words[10].word, "turtle");
     strcpy(words[10].characteristic, "A slow-moving reptile with a hard shell that protects its body.");
-
+ 
     strcpy(words[11].word, "horse");
     strcpy(words[11].characteristic, "A large domesticated mammal with a mane and tail, used for riding and transportation.");
 

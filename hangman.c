@@ -4,8 +4,19 @@
 #include <string.h>
 #include <time.h>
 #include "word.h"
+#include <unistd.h>
 #define true 1
 #define false 0
+
+
+void animate_print(char *str) {
+    int i;
+    for (i = 0; str[i]; i++) {
+        printf("%c", str[i]);
+        fflush(stdout);
+        usleep(100000);
+    }
+}
 
 void makeLower(char option[], char lowerGuess[]){
     int i;
@@ -25,9 +36,9 @@ int main() {
     int incorrect_guesses = 0;
     char letter;
     int found = false;
+    char *display;
     char option[100];
     char guess[100];
-    char display[100];
     char lowerOption[100];
     char lowerGuess[100];
     char lowerLetter[100];
@@ -37,12 +48,14 @@ int main() {
     words = animalWords();
 
     srand(time(NULL));
-    randomIndex = rand() % 20;
+    randomIndex = rand() % 11;
+    display = malloc(strlen(words[randomIndex].word)*sizeof(char));
 
     /* initialize the display array with underscores*/
     for (i = 0; i < strlen(words[randomIndex].word); i++) {
         display[i] = '_';
     }
+    display[i] = '\0';
 
     printf("\nWelcome to hangman\n");
 
