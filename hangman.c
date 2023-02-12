@@ -61,12 +61,13 @@ int main() {
     
     while(exitloop == true){
         animate_print("\nWelcome to hangman\n");
-        animate_print("GOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES ");
+        animate_print("\nGOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES\n");
         animate_print("\nARE YOU READY [YES][NO]: ");
         scanf("%s",ready);
 
         if (strcmp(ready, "yes") == 0){
             exitloop= false;
+            system("clear");
     
 
             while (incorrect_guesses < 7 && correct_guesses < strlen(words[randomIndex].word) && (strcmp(guess, words[randomIndex].word) != 0)){
@@ -89,6 +90,7 @@ int main() {
                     else if (strcmp(lowerGuess, words[randomIndex].word) != 0){
                         printf("\nYour guess is incorrect.\n");
                         incorrect_guesses+=2;
+                        system("clear");
                     }
                 }
                 else if (strcmp(lowerOption, "no") == 0) {
@@ -103,6 +105,7 @@ int main() {
                             display[i] = *lowerLetter;
                             found = true;
                             correct_guesses++;
+                            system("clear");
                             break;
                         }
                     }
@@ -110,6 +113,7 @@ int main() {
                     if (found == false) {
                         printf("\nThe letter '%s' was not found in the word.\n", lowerLetter);
                         incorrect_guesses ++;
+                        system("clear");
                     }
                 if (incorrect_guesses == 3){
                     clue(words,randomIndex);
@@ -128,7 +132,7 @@ int main() {
     }
 
     if (correct_guesses == strlen(words[randomIndex].word)) {
-        printf("\nYou Win\n");
+        printf("\nCongratulations! You guessed the word correctly.\n");
     }
 
     return 0;
