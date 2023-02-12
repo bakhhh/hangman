@@ -46,11 +46,12 @@ int main() {
     int i;
     int exitloop = true;
     int randomIndex;
+    int score;
     word *words;
     words = animalWords();
 
     srand(time(NULL));
-    randomIndex = rand() % 11;
+    randomIndex = rand() % 20;
     display = malloc(strlen(words[randomIndex].word)*sizeof(char));
 
     /* initialize the display array with underscores*/
