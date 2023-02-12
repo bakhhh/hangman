@@ -61,7 +61,7 @@ int main() {
     
     while(exitloop == true){
         animate_print("\nWelcome to hangman\n");
-        animate_print("\nGOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES\n");
+        printf("\nGOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES\n");
         animate_print("\nARE YOU READY [YES][NO]: ");
         scanf("%s",ready);
 
@@ -105,6 +105,13 @@ int main() {
                             display[i] = *lowerLetter;
                             found = true;
                             correct_guesses++;
+        
+                            for (int j = i + 1; j < strlen(words[randomIndex].word); j++) {
+                                if ((words[randomIndex].word)[j] == *lowerLetter) {
+                                    display[j] = *lowerLetter;
+                                    correct_guesses++;
+                                }
+                            }
                             system("clear");
                             break;
                         }
@@ -115,7 +122,7 @@ int main() {
                         incorrect_guesses ++;
                         system("clear");
                     }
-                if (incorrect_guesses == 3){
+                if (incorrect_guesses == 5){
                     clue(words,randomIndex);
             }
 
@@ -123,6 +130,7 @@ int main() {
             }
         }
         else if (strcmp(ready, "no") == 0) {
+            system("clear");
             continue;
   }
     }
