@@ -60,9 +60,9 @@ int main() {
     display[i] = '\0';
     
     while(exitloop == true){
-        printf("\nWelcome to hangman\n");
-        printf("GOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES ");
-        printf("\nARE YOU READY [YES][NO]: ");
+        animate_print("\nWelcome to hangman\n");
+        animate_print("GOAL: YOU NEED TO FIGURE OUT THE WORD BEFORE THE PLAYER GETS HUNG\nYOU HAVE 7 CHANCES FOR EACH INCORRECT LETTER YOU LOSE A CHANCE AND FOR EACH INCORRECT GUESS YOU LOSE 2 CHANCES ");
+        animate_print("\nARE YOU READY [YES][NO]: ");
         scanf("%s",ready);
 
         if (strcmp(ready, "yes") == 0){
