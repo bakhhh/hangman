@@ -69,7 +69,7 @@ word* animalWords() {
 
 
 
-
+    free(words);
 
     return words;
 }
