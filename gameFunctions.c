@@ -31,7 +31,7 @@ void clue(word *words,int randomIndex){
 
 }
 
-void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses, int *incorrect_guesses){
+void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses, int *incorrect_guesses, int *score){
     int found = false;
     char letter;
     char option[100];
@@ -42,6 +42,7 @@ void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses,
     int i,j;
     while (*incorrect_guesses < 7 && *correct_guesses < strlen(words[randomIndex].word) && (strcmp(guess, words[randomIndex].word) != 0)){
         printf("\nCorrect Guesses %d/%lu                             Lives %d/7\n",*correct_guesses,strlen(words[randomIndex].word),*incorrect_guesses);
+        printf("\nScore: %d",*score);
         printf("\nWord: %s\n", display);
 
         printf("\nWould you like to guess the word [YES][NO]: ");
@@ -55,6 +56,8 @@ void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses,
             
             if (strcmp(lowerGuess, words[randomIndex].word) == 0) {
                 printf("\nCongratulations! You guessed the word correctly.\n");
+                *correct_guesses =0;
+                (*score) ++;
                 break;
             }
             else if (strcmp(lowerGuess, words[randomIndex].word) != 0){
@@ -62,6 +65,7 @@ void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses,
                 (*incorrect_guesses)+=2;
                 system("clear");
             }
+
         }
         else if (strcmp(lowerOption, "no") == 0) {
             printf("\nEnter your letter guess: ");
@@ -92,6 +96,12 @@ void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses,
                 (*incorrect_guesses) ++;
                 system("clear");
             }
+            if (*correct_guesses == strlen(words[randomIndex].word)) {
+                printf("\nCongratulations! You guessed the word correctly.\n");
+                *correct_guesses = 0;
+                (*score) ++;
+                break;
+    }
         if (*incorrect_guesses == 5){
             clue(words,randomIndex);
     }
