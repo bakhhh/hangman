@@ -10,6 +10,7 @@
 #define false 0
 
 
+
 int main() {
     int correct_guesses = 0;
     int incorrect_guesses = 0;
@@ -57,8 +58,18 @@ int main() {
     }
 
     if (incorrect_guesses >= 7) {
+        printf("-------\n"
+                "|     |\n"
+                "|     0\n"
+                "|    /|\\\n"
+                "|    | |\n"
+                "|\n"
+                "|---------\n");
+
         printf("\nYou Lose the word was %s\n",words[randomIndex].word);
         printf("\nScore %d\n",score);
+
+
 
     }
 

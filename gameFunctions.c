@@ -31,6 +31,81 @@ void clue(word *words,int randomIndex){
 
 }
 
+void printHangman(int incorrectGuesses) {
+    if (incorrectGuesses ==0){
+    printf("-------\n"
+           "|     \n"
+           "|     \n"
+           "|     \n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+    else if (incorrectGuesses ==1){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     \n"
+           "|     \n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+    else if (incorrectGuesses ==2){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     O\n"
+           "|     \n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+
+    else if (incorrectGuesses ==3){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     O\n"
+           "|     |\n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+    else if (incorrectGuesses ==4){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     O\n"
+           "|    /|\n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+
+    else if (incorrectGuesses ==5){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     O\n"
+           "|    /|\\\n"
+           "|     \n"
+           "|\n"
+           "|---------\n");
+    }
+    else if (incorrectGuesses ==6){
+
+    printf("-------\n"
+           "|     |\n"
+           "|     O\n"
+           "|    /|\\\n"
+           "|    / \\\n"
+           "|\n"
+           "|---------\n");
+    }
+   
+}
+
 void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses, int *incorrect_guesses, int *score){
     int found = false;
     char letter;
@@ -44,6 +119,7 @@ void gameLoop(char *display, word *words, int randomIndex, int *correct_guesses,
         printf("\nCorrect Guesses %d/%lu                             Lives %d/7\n",*correct_guesses,strlen(words[randomIndex].word),*incorrect_guesses);
         printf("\nScore: %d",*score);
         printf("\nWord: %s\n", display);
+        printHangman(*incorrect_guesses);
 
         printf("\nWould you like to guess the word [YES][NO]: ");
         scanf("%s", option);
